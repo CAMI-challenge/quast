@@ -1,3 +1,3 @@
 default: quast "combined_quast_output" "quast.py"
 metaquast-default: quast "combined_reference" "metaquast.py"
-metaquast-scaffold: quast "combined_reference" "metaquast.py"
+metaquast-scaffold:  quast "combined_reference" "metaquast.py" " --scaffolds --unique-mapping   --gene-finding  "
