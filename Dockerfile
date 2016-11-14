@@ -1,18 +1,17 @@
 FROM ubuntu:latest
 
-ENV PACKAGES wget make xz-utils g++ python python-matplotlib perl ca-certificates
+ENV PACKAGES wget make xz-utils unzip g++ python python-matplotlib perl ca-certificates
 RUN apt-get update -y && apt-get install -y --no-install-recommends ${PACKAGES}
 
-ENV URL https://s3-us-west-1.amazonaws.com/bioboxes-packages/downloads/quast-3.2.tar.xz
+ENV QUAST_URL https://github.com/ablab/quast/archive/release_4.0.zip
 ENV DIR /usr/local/quast
 
 RUN mkdir ${DIR}
 
-RUN cd ${DIR} &&\
-    wget --quiet --no-check-certificate ${URL} --output-document - |\
-    tar xJf - --directory . --strip-components=1 && \
-    cd libs/MUMmer3.23-linux && \
-    make CPPFLAGS="-O3 -DSIXTYFOURBITS"
+RUN cd ${DIR} && \ 
+    wget --quiet --no-check-certificate ${QUAST_URL} -O quast.zip && \
+    unzip quast.zip && mv quast-release_4.0/* . && \ 
+    cd libs/MUMmer3.23-linux &&  make CPPFLAGS="-O3 -DSIXTYFOURBITS"
 
 COPY ./run /
 
