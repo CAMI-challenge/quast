@@ -13,7 +13,7 @@ RUN cd ${DIR} && \
     unzip quast.zip && mv quast-release_4.0/* . && \ 
     cd libs/MUMmer3.23-linux &&  make CPPFLAGS="-O3 -DSIXTYFOURBITS"
 
-COPY ./run /
+COPY ./run /evaluate.sh
 
 ENV CONVERT https://github.com/bronze1man/yaml2json/raw/master/builds/linux_386/yaml2json
 # download yaml2json and make it executable
@@ -44,4 +44,4 @@ ENV PATH ${PATH}:${VALIDATOR}
 
 ADD schema.yml /
 
-ENTRYPOINT ["/run"]
+ENTRYPOINT ["/evaluate.sh"]
