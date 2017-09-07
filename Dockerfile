@@ -44,4 +44,6 @@ ENV PATH ${PATH}:${VALIDATOR}
 
 ADD schema.yml /
 
+COPY ./metaquast-scaffold /metaquast-scaffold
+
 ENTRYPOINT ["/evaluate.sh"]
